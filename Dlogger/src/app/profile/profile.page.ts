@@ -3,6 +3,8 @@ import { AlertController } from '@ionic/angular';
 import { AuthService } from '../services/user/auth.service';
 import { ProfileService } from '../services/user/profile.service';
 import { Router } from '@angular/router';
+import { MenuController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-profile',
@@ -13,6 +15,7 @@ export class ProfilePage implements OnInit {
   public userProfile: any;
   public birthDate: Date;
   constructor(
+    public menuCtrl: MenuController,
     private alertCtrl: AlertController,
     private authService: AuthService,
     private profileService: ProfileService,
@@ -20,6 +23,8 @@ export class ProfilePage implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.menuCtrl.close();
+
     this.profileService
       .getUserProfile()
       .get()

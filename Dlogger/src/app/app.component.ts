@@ -5,6 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-root',
@@ -12,6 +13,7 @@ import { AngularFireModule } from '@angular/fire';
 })
 export class AppComponent {
   constructor(
+    public menuCtrl: MenuController,
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar
