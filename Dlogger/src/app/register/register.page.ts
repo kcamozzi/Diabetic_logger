@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth'
-import { auth } from 'firebase/app'
+import { AuthService } from '../services/user/auth.service';
 import { Router } from '@angular/router'
 import { AlertController } from '@ionic/angular'
 
@@ -16,6 +16,7 @@ export class RegisterPage implements OnInit {
   cpassword: string = ""
   constructor(
     public afAuth: AngularFireAuth,
+    private authService: AuthService,
     public alert: AlertController,
     public router: Router
     ) { }
@@ -30,8 +31,7 @@ export class RegisterPage implements OnInit {
       return console.error("Passowrds don't match")
     }
     try {
-      const res = await this.afAuth.auth.createUserWithEmailAndPassword(username, password)
-      console.log(res)
+      this.authService.signupUser(username, password)
       this.showAlert("Success!", "Welcome!")
       this.router.navigate(['/home'])
     } catch(err) {

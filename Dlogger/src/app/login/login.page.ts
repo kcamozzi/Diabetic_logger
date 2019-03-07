@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth'
-import { auth } from 'firebase/app'
+import { AuthService } from '../services/user/auth.service';
 import { Router } from '@angular/router'
 import { AlertController } from '@ionic/angular'
 
@@ -15,6 +15,7 @@ export class LoginPage implements OnInit {
   password:string = "";
   constructor(
     public afAuth: AngularFireAuth,
+    private authService: AuthService,
     public alert: AlertController,
     public router: Router
     ) { }
@@ -25,7 +26,7 @@ export class LoginPage implements OnInit {
  async login() {
     const { username, password } = this
     try {
-      const res = await this.afAuth.auth.signInWithEmailAndPassword(username, password)
+      this.authService.loginUser(username, password)
       console.log("Login Successful")
       this.router.navigate(['/home'])
     } catch(err) {
