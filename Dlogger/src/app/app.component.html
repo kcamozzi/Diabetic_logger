@@ -13,7 +13,18 @@
               Profile
             </ion-label>
           </ion-item>
-          <ion-item> Menu Item</ion-item>
+          <ion-item routerLink="/logbook">
+            <ion-icon name="book" slot="start"></ion-icon>
+            <ion-label>
+              Logbook
+            </ion-label>
+          </ion-item>
+        <ion-item routerLink="/reminders">
+          <ion-icon name="notifications" slot="start"></ion-icon>
+          <ion-label>
+            Reminders
+          </ion-label>
+        </ion-item>
       </ion-content>
     </ion-menu>
     <ion-router-outlet main></ion-router-outlet>

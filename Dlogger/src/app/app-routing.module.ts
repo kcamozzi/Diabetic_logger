@@ -8,6 +8,8 @@ const routes: Routes = [
   { path: 'home', loadChildren: './home/home.module#HomePageModule' },
   { path: 'profile', loadChildren: './profile/profile.module#ProfilePageModule' },
   { path: 'reset-password', loadChildren: './reset-password/reset-password.module#ResetPasswordPageModule' },
+  { path: 'logbook', loadChildren: './logbook/logbook.module#LogbookPageModule' },
+  { path: 'reminders', loadChildren: './reminders/reminders.module#RemindersPageModule' },
 ];
 
 @NgModule({
