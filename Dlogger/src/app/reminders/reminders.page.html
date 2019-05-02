@@ -8,5 +8,123 @@
 </ion-header>
 
 <ion-content padding>
+    <div class="center">
+        <h3>Select reminder type</h3>
+    </div>
 
+    <ion-segment [(ngModel)]="reminder_type">
+        <ion-segment-button value="quick">
+          <ion-label>Quick</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="scheduled">
+          <ion-label>Scheduled</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="daily">
+            <ion-label>Daily</ion-label>
+          </ion-segment-button>
+      </ion-segment>
+
+      <div [ngSwitch]="reminder_type">
+        <ion-list *ngSwitchCase="'quick'">
+          <ion-item>
+              <ion-label>Remind me in: </ion-label><ion-icon name="time"></ion-icon>
+              <ion-select [(ngModel)]="quick_hours" (ionChange)="updateHours(quick_hours)" okText="Okay" cancelText="Dismiss">
+                <ion-select-option value="1">1 Hour</ion-select-option>
+                <ion-select-option value="2">2 Hours</ion-select-option>
+                <ion-select-option value="3">3 Hours</ion-select-option>
+                <ion-select-option value="4">4 Hours</ion-select-option>
+                <ion-select-option value="5">5 Hours</ion-select-option>
+                <ion-select-option value="6">6 Hours</ion-select-option>
+                <ion-select-option value="7">7 Hours</ion-select-option>
+                <ion-select-option value="8">8 Hours</ion-select-option>
+                <ion-select-option value="9">9 Hours</ion-select-option>
+                <ion-select-option value="10">10 Hours</ion-select-option>
+                <ion-select-option value="11">11 Hours</ion-select-option>
+                <ion-select-option value="12">12 Hours</ion-select-option>
+              </ion-select>
+            </ion-item>
+            <ion-button expand="block" (click)="quickNotification()">Create Quick Reminder</ion-button>
+          </ion-list>
+          <ion-list *ngSwitchCase="'scheduled'">
+            <ion-item>
+              <ion-label>Select Date</ion-label><ion-icon name="calendar"></ion-icon>
+              <ion-datetime displayFormat="DDDD MMM D, YYYY" min="2019" max="2022" [(ngModel)]="schedule_date" (ionChange)="updateDate(schedule_date)"></ion-datetime>
+            </ion-item>
+              <ion-item>
+                  <ion-label>Enter time</ion-label>
+                  <ion-select [(ngModel)]="schedule_hours" (ionChange)="updateTime(schedule_hours, schedule_minutes, schedule_AMPM)" okText="Okay" cancelText="Dismiss">
+                    <ion-select-option value="1">1</ion-select-option>
+                    <ion-select-option value="2">2</ion-select-option>
+                    <ion-select-option value="3">3</ion-select-option>
+                    <ion-select-option value="4">4</ion-select-option>
+                    <ion-select-option value="5">5</ion-select-option>
+                    <ion-select-option value="6">6</ion-select-option>
+                    <ion-select-option value="7">7</ion-select-option>
+                    <ion-select-option value="8">8</ion-select-option>
+                    <ion-select-option value="9">9</ion-select-option>
+                    <ion-select-option value="10">10</ion-select-option>
+                    <ion-select-option value="11">11</ion-select-option>
+                    <ion-select-option value="12">12</ion-select-option>
+                  </ion-select>
+                  <ion-select [(ngModel)]="schedule_minutes" (ionChange)="updateTime(schedule_hours, schedule_minutes, schedule_AMPM)" okText="Okay" cancelText="Dismiss">
+                    <ion-select-option value="00">00</ion-select-option>
+                    <ion-select-option value="15">15</ion-select-option>
+                    <ion-select-option value="30">30</ion-select-option>
+                    <ion-select-option value="45">45</ion-select-option>
+                  </ion-select>
+                  <ion-select [(ngModel)]="schedule_AMPM" (ionChange)="updateTime(schedule_hours, schedule_minutes, schedule_AMPM)" okText="Okay" cancelText="Dismiss">
+                      <ion-select-option value="AM">AM</ion-select-option>
+                      <ion-select-option value="PM">PM</ion-select-option>
+                    </ion-select>
+                </ion-item>
+              <ion-button expand="block" (click)="scheduleNotification()">Create Scheduled Reminder</ion-button>
+          </ion-list>
+          <ion-list *ngSwitchCase="'daily'">
+              <ion-item>
+                  <ion-label>Enter time</ion-label><ion-icon name="time"></ion-icon>
+                  <ion-select [(ngModel)]="schedule_hours" (ionChange)="updateTime(schedule_hours, schedule_minutes, schedule_AMPM)" okText="Okay" cancelText="Dismiss">
+                    <ion-select-option value="1">1</ion-select-option>
+                    <ion-select-option value="2">2</ion-select-option>
+                    <ion-select-option value="3">3</ion-select-option>
+                    <ion-select-option value="4">4</ion-select-option>
+                    <ion-select-option value="5">5</ion-select-option>
+                    <ion-select-option value="6">6</ion-select-option>
+                    <ion-select-option value="7">7</ion-select-option>
+                    <ion-select-option value="8">8</ion-select-option>
+                    <ion-select-option value="9">9</ion-select-option>
+                    <ion-select-option value="10">10</ion-select-option>
+                    <ion-select-option value="11">11</ion-select-option>
+                    <ion-select-option value="12">12</ion-select-option>
+                  </ion-select>
+                  <ion-select [(ngModel)]="schedule_minutes" (ionChange)="updateTime(schedule_hours, schedule_minutes, schedule_AMPM)" okText="Okay" cancelText="Dismiss">
+                    <ion-select-option value="00">00</ion-select-option>
+                    <ion-select-option value="15">15</ion-select-option>
+                    <ion-select-option value="30">30</ion-select-option>
+                    <ion-select-option value="45">45</ion-select-option>
+                  </ion-select>
+                  <ion-select [(ngModel)]="schedule_AMPM" (ionChange)="updateTime(schedule_hours, schedule_minutes, schedule_AMPM)" okText="Okay" cancelText="Dismiss">
+                      <ion-select-option value="AM">AM</ion-select-option>
+                      <ion-select-option value="PM">PM</ion-select-option>
+                    </ion-select>
+                </ion-item>
+              <ion-button expand="block" (click)="dailyNotification()">Create Daily Reminder</ion-button>
+          </ion-list>
+      </div>
+
+
+
+
+
+  <ion-button expand="block" (click)="getAll()">Show All Reminders</ion-button>
+  <ion-button expand="block" (click)="clearAllNotificaitons()">Clear All Notifications</ion-button>
+
+  <ion-list>
+    <ion-item *ngFor="let n of scheduled">
+      <ion-label text-wrap>
+        {{ n.id }} - {{ n.title }}
+        <p>Trigger: {{ n.trigger | json }}</p>
+      </ion-label>
+
+    </ion-item>
+  </ion-list>
 </ion-content>

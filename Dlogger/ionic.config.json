@@ -1,5 +1,7 @@
 {
   "name": "Dlogger",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

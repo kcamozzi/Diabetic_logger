@@ -26,15 +26,9 @@ export class LoginPage implements OnInit {
  async login() {
     const { username, password } = this
     try {
-      this.authService.loginUser(username, password)
-      console.log("Login Successful")
-      this.router.navigate(['/home'])
+      this.authService.loginUser(username, password).then( () => this.router.navigate(['/home']))
     } catch(err) {
-      console.dir(err)
-      if(err.code == "auth/user-not-found") {
-        this.showAlert("Error", "User Not Found")
-        console.log("User not found")
-      }
+      console.dir(err)   
     }
   }
 
