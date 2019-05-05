@@ -12,7 +12,7 @@
         <h3>Select reminder type</h3>
     </div>
 
-    <ion-segment [(ngModel)]="reminder_type">
+    <ion-segment color="tertiary" [(ngModel)]="reminder_type">
         <ion-segment-button value="quick">
           <ion-label>Quick</ion-label>
         </ion-segment-button>
@@ -43,7 +43,7 @@
                 <ion-select-option value="12">12 Hours</ion-select-option>
               </ion-select>
             </ion-item>
-            <ion-button expand="block" (click)="quickNotification()">Create Quick Reminder</ion-button>
+            <ion-button expand="block" color="tertiary" (click)="quickNotification()">Create Quick Reminder</ion-button>
           </ion-list>
           <ion-list *ngSwitchCase="'scheduled'">
             <ion-item>
@@ -77,7 +77,7 @@
                       <ion-select-option value="PM">PM</ion-select-option>
                     </ion-select>
                 </ion-item>
-              <ion-button expand="block" (click)="scheduleNotification()">Create Scheduled Reminder</ion-button>
+              <ion-button expand="block" color="tertiary" (click)="scheduleNotification()">Create Scheduled Reminder</ion-button>
           </ion-list>
           <ion-list *ngSwitchCase="'daily'">
               <ion-item>
@@ -107,7 +107,7 @@
                       <ion-select-option value="PM">PM</ion-select-option>
                     </ion-select>
                 </ion-item>
-              <ion-button expand="block" (click)="dailyNotification()">Create Daily Reminder</ion-button>
+              <ion-button expand="block" color="tertiary" (click)="dailyNotification()">Create Daily Reminder</ion-button>
           </ion-list>
       </div>
 
@@ -115,8 +115,8 @@
 
 
 
-  <ion-button expand="block" (click)="getAll()">Show All Reminders</ion-button>
-  <ion-button expand="block" (click)="clearAllNotificaitons()">Clear All Notifications</ion-button>
+  <ion-button expand="block" color="tertiary" (click)="getAll()">Show All Reminders</ion-button>
+  <ion-button expand="block" color="tertiary" (click)="clearAllNotificaitons()">Clear All Notifications</ion-button>
 
   <ion-list>
     <ion-item *ngFor="let n of scheduled">
