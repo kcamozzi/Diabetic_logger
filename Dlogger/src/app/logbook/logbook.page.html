@@ -9,4 +9,21 @@
 
 <ion-content padding>
 
+
+  <div>
+    <canvas  #chartcanvas id="myChart"></canvas>
+  </div>
+  <div class="center">
+    <ion-button (click)="checkMapGot()" color="tertiary">Graph Values</ion-button>
+  </div>
+  <div class="center" *ngFor="let recipient of glucoseValues | keyvalue">
+    <div *ngIf="recipient?.key || recipient?.value">
+      <b>{{recipient.key | slice:0:21 }}</b> {{recipient.value}}
+    </div>
+  </div>
+  <br><br><br><br>
+  <div class="center">
+    <ion-button color="tertiary" size="small" (click)="clearLocalStorage()">Clear Local Storage</ion-button>
+  </div>
+
 </ion-content>

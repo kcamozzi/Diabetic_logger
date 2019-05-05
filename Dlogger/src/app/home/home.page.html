@@ -14,25 +14,99 @@
   </div>
   <div class="center">
     <h2>Welcome<ion-col class="text-center" size="7" *ngIf="userProfile?.firstName || userProfile?.lastName">
-      {{userProfile?.firstName}}
-    </ion-col></h2>
-    <ion-item color="tertiary" class="center">
-      <ion-label>
-        Enter Blood Glucose
-      </ion-label>
-    </ion-item>
+        {{userProfile?.firstName}}
+      </ion-col></h2>
   </div>
 
-  <div class="right">
-      <ion-item>
-        <ion-label class="value">
-            {{value}}
-        </ion-label>
-      </ion-item>
+  <ion-segment [(ngModel)]="input_type" color="tertiary">
+      <ion-segment-button value="current">
+        <ion-label>Current</ion-label>
+        <ion-icon name="happy"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="custom">
+        <ion-icon name="create"></ion-icon>
+        <ion-label>Custom</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+
+  <div [ngSwitch]="input_type">
+    <div *ngSwitchCase="'current'">
+      <br>
+      <div class="center">
+          <ion-item color="tertiary" class="center">
+            <ion-label>
+              Enter Blood Glucose
+            </ion-label>
+          </ion-item>
+      </div>
+      <div class="right">
+          <ion-item>
+            <ion-label class="value">
+                {{value}}
+            </ion-label>
+          </ion-item>
+      </div>
+      <div class="myBorder">
+      <div *ngFor="let numRows of numbers" class="center-input">
+        <ion-button color="tertiary" size="large" *ngFor="let num of numRows" (click)="onButtonPress(num, input_type)">{{num}}</ion-button>
+      </div>
+      </div>
   </div>
-  <div class="myBorder">
-  <div *ngFor="let numRows of numbers" class="center-input">
-    <ion-button color="tertiary" size="large" *ngFor="let num of numRows" (click)="onButtonPress(num)">{{num}}</ion-button>
+
+  <div *ngSwitchCase="'custom'">
+      <br>
+      <ion-item>
+          <ion-label>Select Date</ion-label><ion-icon name="calendar"></ion-icon>
+          <ion-datetime displayFormat="DDDD MMM D, YYYY" min="2019" max="2022" [(ngModel)]="custom_date" (ionChange)="updateDate(custom_date)"></ion-datetime>
+        </ion-item>
+          <ion-item>
+              <ion-label>Enter time</ion-label>
+              <ion-select [(ngModel)]="custom_hours" (ionChange)="updateTime(custom_hours, custom_minutes, custom_AMPM)" okText="Okay" cancelText="Dismiss">
+                <ion-select-option value="1">1</ion-select-option>
+                <ion-select-option value="2">2</ion-select-option>
+                <ion-select-option value="3">3</ion-select-option>
+                <ion-select-option value="4">4</ion-select-option>
+                <ion-select-option value="5">5</ion-select-option>
+                <ion-select-option value="6">6</ion-select-option>
+                <ion-select-option value="7">7</ion-select-option>
+                <ion-select-option value="8">8</ion-select-option>
+                <ion-select-option value="9">9</ion-select-option>
+                <ion-select-option value="10">10</ion-select-option>
+                <ion-select-option value="11">11</ion-select-option>
+                <ion-select-option value="12">12</ion-select-option>
+              </ion-select>
+              <ion-select [(ngModel)]="custom_minutes" (ionChange)="updateTime(custom_hours, custom_minutes, custom_AMPM)" okText="Okay" cancelText="Dismiss">
+                <ion-select-option value="00">00</ion-select-option>
+                <ion-select-option value="15">15</ion-select-option>
+                <ion-select-option value="30">30</ion-select-option>
+                <ion-select-option value="45">45</ion-select-option>
+              </ion-select>
+              <ion-select [(ngModel)]="custom_AMPM" (ionChange)="updateTime(custom_hours, custom_minutes, custom_AMPM)" okText="Okay" cancelText="Dismiss">
+                  <ion-select-option value="AM">AM</ion-select-option>
+                  <ion-select-option value="PM">PM</ion-select-option>
+                </ion-select>
+            </ion-item>
+            <br>
+      <div class="center">
+          <ion-item color="tertiary" class="center">
+            <ion-label>
+              Enter Blood Glucose
+            </ion-label>
+          </ion-item>
+      </div>
+      <div class="right">
+          <ion-item>
+            <ion-label class="value">
+                {{value}}
+            </ion-label>
+          </ion-item>
+      </div>
+      <div class="myBorder">
+      <div *ngFor="let numRows of numbers" class="center-input">
+        <ion-button color="tertiary" size="large" *ngFor="let num of numRows" (click)="onButtonPress(num, input_type)">{{num}}</ion-button>
+      </div>
+      </div>
   </div>
 </div>
 </ion-content>

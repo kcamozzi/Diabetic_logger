@@ -13,8 +13,10 @@ import  firebaseConfig from './firebase'
 import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { IonicStorageModule } from '@ionic/storage';
 
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
+import { Ng2GoogleChartsModule } from 'ng2-google-charts';
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,7 +26,9 @@ import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
      IonicModule.forRoot(), 
      AppRoutingModule,
      AngularFireModule.initializeApp(environment.firebase),
-     AngularFireAuthModule
+     AngularFireAuthModule,
+     IonicStorageModule.forRoot(),
+     Ng2GoogleChartsModule
     ],
   providers: [
     StatusBar,

@@ -4,6 +4,7 @@ import { AuthService } from '../services/user/auth.service';
 import { ProfileService } from '../services/user/profile.service';
 import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
+import { Storage } from '@ionic/storage';
 
 
 @Component({
@@ -19,7 +20,8 @@ export class ProfilePage implements OnInit {
     private alertCtrl: AlertController,
     private authService: AuthService,
     private profileService: ProfileService,
-    private router: Router
+    private router: Router,
+    public storage: Storage
   ) {}
 
   ngOnInit() {
@@ -120,5 +122,9 @@ export class ProfilePage implements OnInit {
       ],
     });
     await alert.present();
+  }
+  
+  clearLocalStorage() {
+    this.storage.clear();
   }
 }
