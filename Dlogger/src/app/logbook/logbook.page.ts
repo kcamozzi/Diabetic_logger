@@ -11,11 +11,14 @@ import { Chart } from 'chart.js';
 export class LogbookPage implements OnInit {
 
   glucoseValues = new Map();
+  glucoseHighLow = new Map();
   lineChartData;
   myChart: Chart;
   hourString: string;
   hourString2: string;
   hour: number = 0;
+  targetLow = 100;
+  targetHigh = 160;
   @ViewChild('chartContainer') chartcontainer: ElementRef;
   @ViewChild('chartcanvas') chartcanvas: ElementRef;
   dailyData = [];
@@ -28,11 +31,11 @@ export class LogbookPage implements OnInit {
     this.menuCtrl.close();
 
     Promise.all([
-      this.retrieveMap()
+      this.retrieveMap(),
     ]);
     this.fillGraph();
-    //this.mapToDataDaily();
     this.createChart();
+    this.highLowMapFill();
 
   }
 
@@ -41,7 +44,6 @@ export class LogbookPage implements OnInit {
   }
 
   fillGraph() {
-    //this.mapToDataDaily();
 
     this.lineChartData = {
       chartType: 'ScatterChart',
@@ -116,8 +118,6 @@ export class LogbookPage implements OnInit {
       );
 
     this.myChart.update();
-/*       console.log(this.glucoseValues);
-      console.log(this.dailyData);  */
     }
 
     entryProcess(entryKey: string, entryValue: number) {
@@ -136,6 +136,27 @@ export class LogbookPage implements OnInit {
       this.dailyData.push({x: this.hour, y: entryValue});
     }
 
+    mapToHighLow(data) {
+      Array.from(data.entries()).forEach(
+        entry => this.highLowEntry(entry[0], entry[1])
+        );
+    }
+
+    highLowEntry(entryKey: string, entryValue: number) {
+      if(entryValue > this.targetHigh)
+      {
+        this.glucoseHighLow.set(entryKey, "High");
+      }
+      else if(entryValue < this.targetLow)
+      {
+        this.glucoseHighLow.set(entryKey, "Low");
+      }
+      else
+      {
+        this.glucoseHighLow.set(entryKey, "In Range");
+      }
+    }
+
     clearLocalStorage() {
       this.storage.clear();
     }
@@ -146,8 +167,13 @@ export class LogbookPage implements OnInit {
       });
     }
 
+    highLowMapFill() {
+      this.storage.get('myMap').then((data) => this.mapToHighLow(data));
+    }
+
     checkMapGot() {
       this.mapToDataDaily();
       console.log(this.dailyData);
+      console.log(this.glucoseHighLow);
     }
 }

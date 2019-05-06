@@ -12,13 +12,15 @@
     </ion-toolbar>
   </ion-header>
 
+
   <ion-content padding>
+    <div class="center">
       <ion-item (click)="updateName()">
         <ion-label>
           <ion-grid>
             <ion-row>
-              <ion-col class="text-left" size="5"> Name </ion-col>
-              <ion-col class="text-center" size="7" *ngIf="userProfile?.firstName || userProfile?.lastName">
+              <ion-col class="left" size="5"> Name </ion-col>
+              <ion-col class="center" size="7" *ngIf="userProfile?.firstName || userProfile?.lastName">
                 {{userProfile?.firstName}} {{userProfile?.lastName}}
               </ion-col>
               <ion-col size="7" class="placeholder-profile text-center" *ngIf="!userProfile?.firstName">
@@ -30,7 +32,7 @@
       </ion-item>
     
       <ion-item>
-        <ion-label class="dob-label">Date of Birth</ion-label>
+        <ion-label class="left">Date of Birth</ion-label>
         <ion-datetime displayFormat="MMM D, YYYY" pickerFormat="D MMM YYYY" [(ngModel)]="birthDate"
           (ionChange)="updateDOB(birthDate)">
         </ion-datetime>
@@ -40,8 +42,8 @@
         <ion-label>
           <ion-grid>
             <ion-row>
-              <ion-col class="text-left" size="5"> Email </ion-col>
-              <ion-col class="text-center" size="7" *ngIf="userProfile?.email">
+              <ion-col class="left" size="5"> Email </ion-col>
+              <ion-col class="center" size="7" *ngIf="userProfile?.email">
                 {{userProfile?.email}}
               </ion-col>
               <ion-col size="7" class="placeholder-profile text-center" *ngIf="!userProfile?.email">
@@ -56,8 +58,8 @@
         <ion-label>
           <ion-grid>
             <ion-row>
-              <ion-col class="text-left" size="5"> Password </ion-col>
-              <ion-col class="text-center" size="7" class="placeholder-profile">
+              <ion-col class="left" size="5"> Password </ion-col>
+              <ion-col class="center" size="7" class="placeholder-profile">
                 <span> Tap here to edit. </span>
               </ion-col>
             </ion-row>
@@ -65,7 +67,8 @@
         </ion-label>
       </ion-item>
 
-      <div class="center">
+      <div>
           <ion-button color="tertiary" (click)="clearLocalStorage()">Clear Local Storage</ion-button>
       </div>
+    </div>
     </ion-content>

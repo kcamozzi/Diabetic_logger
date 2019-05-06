@@ -11,18 +11,35 @@
 
 
   <div>
-    <canvas  #chartcanvas id="myChart"></canvas>
+    <canvas #chartcanvas id="myChart"></canvas>
   </div>
-  <div class="center">
-    <ion-button (click)="checkMapGot()" color="tertiary">Graph Values</ion-button>
+  <div class="otherCenter">
+    <ion-button  (click)="checkMapGot()" color="tertiary">Graph Values</ion-button>
   </div>
-  <div class="center" *ngFor="let recipient of glucoseValues | keyvalue">
-    <div *ngIf="recipient?.key || recipient?.value">
-      <b>{{recipient.key | slice:0:21 }}</b> {{recipient.value}}
+
+  <ion-grid>
+    <ion-row class="center">
+      <ion-col size = "6">
+        <b>Date</b>
+      </ion-col>
+      <ion-col size = "6">
+        <b>Glucose</b>
+      </ion-col>
+    </ion-row>
+  <ion-row class="cen" *ngFor="let recipient of glucoseValues | keyvalue">
+    <div class="center" *ngIf="recipient?.key || recipient?.value">
+        <ion-col size = "6"><div class="left">{{recipient.key | slice:0:21 }}</div></ion-col>
+        <ion-col size = "6"><div class="glucose">{{recipient.value}},</div></ion-col>
+        <ion-col size = "6" [ngClass]="{
+          'high' : glucoseHighLow.get(recipient.key) === 'High',
+          'low' : glucoseHighLow.get(recipient.key) === 'Low',
+          'inRange' : glucoseHighLow.get(recipient.key) === 'In Range'
+        }">{{glucoseHighLow.get(recipient.key)}}</ion-col>
     </div>
-  </div>
+  </ion-row>
+  </ion-grid>
   <br><br><br><br>
-  <div class="center">
+  <div class="otherCenter">
     <ion-button color="tertiary" size="small" (click)="clearLocalStorage()">Clear Local Storage</ion-button>
   </div>
 

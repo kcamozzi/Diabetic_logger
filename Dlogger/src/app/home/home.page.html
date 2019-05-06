@@ -8,15 +8,12 @@
 </ion-header>
 
 <ion-content padding>
-  <div class="main_img">
-    <img src="../assets/drop.png" width="60"/>
-
-  </div>
   <div class="center">
-    <h2>Welcome<ion-col class="text-center" size="7" *ngIf="userProfile?.firstName || userProfile?.lastName">
-        {{userProfile?.firstName}}
+    <h2 class="in">Welcome<ion-col size="7" *ngIf="userProfile?.firstName || userProfile?.lastName">
+        {{userProfile?.firstName}}!
       </ion-col></h2>
   </div>
+
 
   <ion-segment [(ngModel)]="input_type" color="tertiary">
       <ion-segment-button value="current">

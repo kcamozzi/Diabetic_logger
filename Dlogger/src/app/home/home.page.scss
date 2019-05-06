@@ -10,6 +10,13 @@
   text-align: center;
 }
 
+.centerTop {
+  margin: auto;
+  width: 90%;
+  text-align: center;
+  display: inline-block;
+}
+
 .right {
   margin: auto;
   width: 80%;
@@ -43,4 +50,8 @@
   border-style: solid;
   border-width: 2px;
   background-color: lightgray;
+}
+
+h2.in {
+  display: inline;
 }

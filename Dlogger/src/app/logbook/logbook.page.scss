@@ -1,6 +1,52 @@
 
 .center {
     margin: auto;
-    width: 90%;
+    width: 100%;
     text-align: center;
+    border-style: solid;
+    border-color: black;
+    border-width: 1px;
+    padding: 2px;
   }
+
+.cen {
+  margin: auto;
+  width: 100%;
+  text-align: center;
+  padding: 2px;
+  border-width: 1px;
+}
+
+.glucose {
+  display: inline-block;
+}
+
+.otherCenter {
+  margin: auto;
+  width: 90%;
+  text-align: center;
+}
+
+.left {
+  float: left;
+}
+
+table.values {
+  border-style: solid;
+  border-color: black;
+}
+
+.high {
+  font-weight: bold;
+  color: red;
+}
+
+.low {
+  font-weight: bold;
+  color: orange;
+}
+
+.inRange {
+  font-weight: bold;
+  color: green;
+}
