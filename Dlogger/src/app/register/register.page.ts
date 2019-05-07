@@ -31,9 +31,10 @@ export class RegisterPage implements OnInit {
       return console.error("Passowrds don't match")
     }
     try {
-      this.authService.signupUser(username, password)
-      this.showAlert("Success!", "Welcome!")
-      this.router.navigate(['/home'])
+      this.authService.signupUser(username, password).then(
+         () => this.router.navigate(['/home']),
+         );
+      
     } catch(err) {
       console.dir(err)
       this.showAlert("Error!", err.message)

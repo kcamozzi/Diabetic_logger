@@ -19,6 +19,7 @@ export class RemindersPage implements OnInit {
   year: number;
   hour: number;
   minute: number;
+  reminder_type = "quick";
   scheduled = [];
 
   constructor(
@@ -51,7 +52,7 @@ export class RemindersPage implements OnInit {
       text: 'Check your blood glucose',
       data: { mydata: 'This is your reminder to check your blood glucose'},
       trigger: { in: this.hour, unit: ELocalNotificationTriggerUnit.SECOND },
-      foreground: true
+      foreground: true,
     });
     this.showAlert("Reminder Created", "Glucose reminder", "You have created a new quick reminder");
   }
@@ -70,8 +71,8 @@ export class RemindersPage implements OnInit {
   dailyNotification() {
     this.localNotifications.schedule({
       id: 42,
-      title: 'Glucose Reminder!!',
-      text: 'Sup foo',
+      title: 'Daily Reminder',
+      text: 'Daily blood glucose reminder',
       trigger: { every: { hour: this.hour, minute: this.minute}, count: 1 },
       foreground: true
     });

@@ -14,13 +14,20 @@ export class LogbookPage implements OnInit {
   glucoseHighLow = new Map();
   lineChartData;
   myChart: Chart;
+  myPieChart: Chart;
   hourString: string;
   hourString2: string;
   hour: number = 0;
   targetLow = 100;
   targetHigh = 160;
+  targetArr = [0, 0, 0];
+  graph_type = "scatter";
+  pieHidden = 1;
+  scatterHidden = 0;
   @ViewChild('chartContainer') chartcontainer: ElementRef;
   @ViewChild('chartcanvas') chartcanvas: ElementRef;
+  @ViewChild('chartContainerPie') chartcontainerPie: ElementRef;
+  @ViewChild('chartcanvasPie') chartcanvasPie: ElementRef;
   dailyData = [];
   constructor(
     public menuCtrl: MenuController,
@@ -33,8 +40,9 @@ export class LogbookPage implements OnInit {
     Promise.all([
       this.retrieveMap(),
     ]);
-    this.fillGraph();
+    //this.fillGraph();
     this.createChart();
+    this.createPieChart();
     this.highLowMapFill();
 
   }
@@ -43,7 +51,7 @@ export class LogbookPage implements OnInit {
     console.log(this.glucoseValues);
   }
 
-  fillGraph() {
+/*   fillGraph() {
 
     this.lineChartData = {
       chartType: 'ScatterChart',
@@ -58,7 +66,7 @@ export class LogbookPage implements OnInit {
       'height': 300
       }
     };
-  }
+  } */
 
   createChart() {   
     this.myChart = new Chart(this.chartcanvas.nativeElement, {
@@ -112,6 +120,26 @@ export class LogbookPage implements OnInit {
     });
   }
 
+  createPieChart() {
+    this.myPieChart = new Chart(this.chartcanvasPie.nativeElement, {
+      type: 'pie',
+      data: {
+        labels: ["Highs", "Lows", "In Target"],
+        datasets: [{
+          label: "Population (millions)",
+          backgroundColor: ["#ff0000", "#ffa500","#008000"],
+          data: this.targetArr
+        }]
+      },
+      options: {
+        title: {
+          display: true,
+          text: 'Blood Glucose by Range'
+        }
+      }
+    });
+  }
+
    mapToDataDaily() {
     Array.from(this.glucoseValues.entries()).forEach(
       entry => this.entryProcess(entry[0], entry[1])
@@ -146,14 +174,17 @@ export class LogbookPage implements OnInit {
       if(entryValue > this.targetHigh)
       {
         this.glucoseHighLow.set(entryKey, "High");
+        this.targetArr[0] = this.targetArr[0] + 1;
       }
       else if(entryValue < this.targetLow)
       {
         this.glucoseHighLow.set(entryKey, "Low");
+        this.targetArr[1] = this.targetArr[1] + 1;
       }
       else
       {
         this.glucoseHighLow.set(entryKey, "In Range");
+        this.targetArr[2] = this.targetArr[2] + 1;
       }
     }
 
@@ -175,5 +206,16 @@ export class LogbookPage implements OnInit {
       this.mapToDataDaily();
       console.log(this.dailyData);
       console.log(this.glucoseHighLow);
+      this.myPieChart.update();
+    }
+
+    hide() {
+      this.scatterHidden = 0;
+      this.pieHidden = 1;
+    }
+
+    unhide() {
+      this.scatterHidden = 1;
+      this.pieHidden = 0;
     }
 }

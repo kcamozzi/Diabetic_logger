@@ -40,10 +40,15 @@ export class AuthService {
           .firestore()
           .doc(`/userProfile/${newUserCredential.user.uid}`)
           .set({ email });
+          this.showAlert("Welcome!", "Successfully created account!");
       })
-      .catch(error => {
-        console.error(error);
-        throw new Error(error);
+      .catch(err => {
+        if(err.code == "auth/invalid-email") {
+          this.showAlert("Error", "Invalid Email")
+          console.log("Invalid Email")
+        }
+        console.error(err);
+        throw new Error(err);
       });
   }
 

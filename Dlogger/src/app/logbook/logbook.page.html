@@ -9,10 +9,39 @@
 
 <ion-content padding>
 
+<!--   <ion-segment [(ngModel)]="graph_type" color="tertiary">
+      <ion-segment-button value="scatter">
+        <ion-label>Scatter</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="pie">
+        <ion-label>Pie Chart</ion-label>
+      </ion-segment-button>
+    </ion-segment>
 
-  <div>
+
+  <div [ngSwitch]="graph_type">
+    <div *ngSwitchCase="'scatter'">
+      <canvas #chartcanvas id="myChart"></canvas>
+    </div>
+    <div *ngSwitchCase="'pie'"> 
+      <canvas #chartcanvas id="myPieChart"></canvas>
+    </div>
+  </div> -->
+
+  <div class="cen">
+    <ion-button color="tertiary" (click)="hide()">Show Scatter</ion-button>
+    <ion-button color="tertiary" (click)="unhide()">Show Pie Chart</ion-button>
+  </div>
+
+  <div [hidden]="scatterHidden">
     <canvas #chartcanvas id="myChart"></canvas>
   </div>
+  <div [hidden]="pieHidden">
+    <canvas #chartcanvasPie id="myPieChart"></canvas>
+  </div>
+
+
+
   <div class="otherCenter">
     <ion-button  (click)="checkMapGot()" color="tertiary">Graph Values</ion-button>
   </div>
